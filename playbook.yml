@@ -2,7 +2,7 @@
 - name: Apache Config Playbook
   hosts: localhost
   connection: local
-  become: false
+  become: true       
   tasks:
     - name: Copy vhost file
       ansible.builtin.copy:
@@ -12,5 +12,6 @@
 
   handlers:
     - name: Restart Apache
-      ansible.builtin.debug:
-        msg: "Simulating Apache Restart..."
+      ansible.builtin.service:   
+        name: apache2
+        state: restarted
